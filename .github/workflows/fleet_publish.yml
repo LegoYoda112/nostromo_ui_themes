@@ -1,0 +1,50 @@
+name: Publish (Fleet)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+    paths:
+      - fleet/**
+
+jobs:
+  publish:
+    name: Publish
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./fleet/nostromo-ui
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: zulu
+          java-version: 17
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
+
+      - name: Distribute Plugin
+        run: "./gradlew clean distZip -Porg.jetbrains.fleet-plugin.marketplaceUploadToken=${{ env.MARKETPLACE_TOKEN }}"
+        env:
+          MARKETPLACE_TOKEN: ${{ secrets.MARKETPLACE_TOKEN }}
+
+      - name: Upload Plugin (Marketplace)
+        run: "./gradlew clean uploadPlugin -Porg.jetbrains.fleet-plugin.marketplaceUploadToken=${{ env.MARKETPLACE_TOKEN }}"
+        env:
+          MARKETPLACE_TOKEN: ${{ secrets.MARKETPLACE_TOKEN }}
+
+      - name: Upload Zip (GitHub)
+        uses: ncipollo/release-action@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          draft: false
+          prerelease: true
+          artifacts: "./fleet/nostromo-ui/nostromo-ui-theme/build/pluginDistribution/*.zip"

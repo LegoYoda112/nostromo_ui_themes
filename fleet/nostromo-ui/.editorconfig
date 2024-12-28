@@ -1,0 +1,20 @@
+# top-most EditorConfig file
+root = true
+
+# Set the default encoding to UTF-8
+[*]
+charset = utf-8
+
+# Indentation style and size
+[*.kt]
+indent_style = space
+indent_size = 4
+
+# Trim trailing whitespace
+trim_trailing_whitespace = true
+
+# Ensure consistent line endings
+end_of_line = lf
+
+# Ensure consistent file endings
+insert_final_newline = true
