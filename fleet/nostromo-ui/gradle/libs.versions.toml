@@ -1,0 +1,12 @@
+[versions]
+kotlin = "2.0.21-488"
+fleet-sdk = "0.6.238"
+fleet-runtime = "1.44.151"
+
+[libraries]
+
+[plugins]
+
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+fleet-plugin = { id = "org.jetbrains.fleet-plugin", version.ref = "fleet-sdk" }
+fleet-plugin-layer = { id = "org.jetbrains.fleet-plugin-layer", version.ref = "fleet-sdk" }

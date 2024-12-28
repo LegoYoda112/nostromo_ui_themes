@@ -1,0 +1,43 @@
+name: Build (Fleet)
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [ "develop" ]
+    paths:
+      - fleet/**
+
+jobs:
+  build:
+    name: Build Plugin
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./fleet/nostromo-ui
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: zulu
+          java-version: 17
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          cache-encryption-key: ${{ secrets.GRADLE_ENCRYPTION_KEY }}
+
+      - name: Distribute Plugin
+        run: "./gradlew clean distZip -Porg.jetbrains.fleet-plugin.marketplaceUploadToken=${{ env.MARKETPLACE_TOKEN }}"
+        env:
+          MARKETPLACE_TOKEN: ${{ secrets.MARKETPLACE_TOKEN }}
+
+      - name: Upload Zip
+        uses: actions/upload-artifact@v4
+        with:
+          name: "Nostromo UI Fleet Theme"
+          path: ./fleet/nostromo-ui/nostromo-ui-theme/build/pluginDistribution/*.zip
+          if-no-files-found: error
