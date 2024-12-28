@@ -1,0 +1,47 @@
+{
+    "meta": {
+        "theme.name": "Nostromo UI",
+        "theme.kind": "Dark",
+        "theme.version": 1
+    },
+    "colors": {
+        "background.primary": "editor_background",
+        "background.secondary": "editor_background",
+        "border": "editor_foreground",
+
+        "button.secondary.background.hovered": "#E0E1E42B",
+
+        "editor.interline.background": "editor_background",
+
+        "island.background": "editor_background",
+
+        "notification.background.default": "editor_background",
+        "notification.moreButton.background.default": "editor_background",
+
+        "popup.background": "editor_background",
+        "popup.goto.background": "editor_background",
+
+        "problemsWidget.tag.weakWarning.background.pressed": "editor_background",
+
+        "tab.background.selected": "#171f24",
+        "tab.background.selectedFocused": "#171f24",
+        "tab.border.selected": "tab_activeBorder",
+        "tab.border.selectedFocused": "tab_activeBorder",
+        "tab.border.dragAndDrop": "tab_activeBorder",
+        "tab.text.default": "#5f8c90",
+        "tab.text.hovered": "editor_foreground",
+        "tab.text.selected": "editor_foreground",
+        "tab.text.selectedFocused": "editor_foreground",
+        "tab.closeIcon.default": "tab_activeBorder",
+        "tab.closeIcon.hovered": "#a8fcfe",
+
+        "terminal.ansiColors.background.ansiBrightWhite": "editor_background",
+
+        "ai.snippet.editor.background": "editor_background"
+    },
+    "palette": {
+        "editor_background": "#141D22",
+        "editor_foreground": "#A5FBFF",
+        "tab_activeBorder": "#154547"
+    }
+}

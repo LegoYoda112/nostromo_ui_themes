@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "name": "Run Fleet with local plugin",
+            "type": "gradle",
+            "workingDir": "$PROJECT_DIR$",
+            "tasks": ["runFleet"],
+            "args": [""],
+        }
+    ]
+}
